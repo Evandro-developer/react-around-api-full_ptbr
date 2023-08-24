@@ -1,0 +1,25 @@
+.header__auth-status {
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header__auth-status:hover {
+  transition: 0.3s ease-in-out;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  * {
+    transition: 0.3s ease-in-out;
+  }
+  .header__auth-status {
+    padding: 8px 0;
+    margin: 0;
+  }
+}

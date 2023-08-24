@@ -1,0 +1,26 @@
+* {
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.popup__input_active {
+  border-bottom-color: rgba(255, 0, 0);
+  margin: 0;
+  opacity: 0.8;
+  pointer-events: auto; /* Adicione essa propriedade */
+}
+
+.popup__input_active:focus {
+  border-bottom-color: rgba(255, 0, 0);
+  opacity: 0.8;
+}
+
+.popup__input_active:hover {
+  border-bottom-color: rgba(255, 0, 0);
+  opacity: 0.4;
+}
+
+.popup__input_active:valid {
+  border-bottom-color: #545454;
+  opacity: 0.8;
+}

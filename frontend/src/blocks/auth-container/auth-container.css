@@ -1,0 +1,21 @@
+.auth-container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  * {
+    transition: 0.3s ease-in-out;
+  }
+  .auth-container {
+    padding-top: 20px;
+    max-width: 282px;
+    max-height: 322px;
+  }
+}

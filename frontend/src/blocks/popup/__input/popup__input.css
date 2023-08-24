@@ -1,0 +1,28 @@
+* {
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.popup__input {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid #545454;
+  outline: 0;
+  padding: 7px 0;
+  margin: 0;
+  opacity: 0.4;
+}
+
+.popup__input::placeholder {
+  color: #545454;
+  opacity: 0.8;
+}
+
+.popup__input:valid {
+  border-bottom-color: #545454;
+  opacity: 0.8;
+}
