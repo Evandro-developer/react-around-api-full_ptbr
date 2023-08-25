@@ -13,18 +13,22 @@ import { validateUserSignup, validateUserLogin } from './utils/validations';
 const app = express();
 
 app.use(cors());
-app.options('*', cors());
-// app.use(
-//   cors({
-//     origin: "https://seu-frontend.com", // Altere para o domínio real do seu frontend
-//   })
-// );
+app.use(
+  cors({
+    origin: [
+      'https://api.aroundfinal.com.br',
+      'https://aroundfinal.com.br',
+      'https://www.aroundfinal.com.br',
+    ],
+    optionsSuccessStatus: 200,
+  }),
+);
 
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/aroundb', {
+  .connect('mongodb://localhost:27017/aroundb', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

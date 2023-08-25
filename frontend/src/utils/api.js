@@ -143,11 +143,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://127.0.0.1:3001",
+  baseUrl: "https://api.aroundfinal.com.br",
 });
-
-// const api = new Api({
-//   baseUrl: "https://seu-backend.com", // Altere para o endereço real do seu backend
-// });
 
 export default api;
