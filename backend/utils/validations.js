@@ -1,6 +1,6 @@
 import { celebrate, Joi } from 'celebrate';
 import validator from 'validator';
-import { emailRegex, avatarRegex } from '../models/user'; // Importe as regexes diretamente
+import { emailRegex, avatarRegex } from '../models/user';
 
 // Validador personalizado para URLs
 export const validateURL = (value, helpers) => {

@@ -1,6 +1,6 @@
 # Projeto 16: React Around API Full (Refatorado)
-Descrição do Projeto
-Este é o projeto final do curso de desenvolvimento web da Practicum, que cosniste em um aplicativo completo chamado "React Around API Full". O projeto é uma evolução do projeto "Around The U.S." que você desenvolveu anteriormente, com a adição de um back-end e outras funcionalidades avançadas.
+## Descrição do Projeto:
+Este é o projeto final do curso de desenvolvimento web da Practicum, que consiste em um aplicativo completo chamado "React Around API Full". O projeto é uma evolução do projeto "Around The U.S." desenvolvido anteriormente, com a adição de um back-end e outras funcionalidades avançadas.
 
 ## Principais Recursos
 - Um aplicativo completo que combina o front-end React com um back-end Express e MongoDB.
@@ -36,9 +36,11 @@ Este é o projeto final do curso de desenvolvimento web da Practicum, que cosnis
 
 ### Tecnologias Utilizadas
 - React com Hooks, como useState e useEffect.
+- Node.js para Plataforma de Backend.
 - Express para o servidor back-end.
 - MongoDB para armazenamento de dados.
 - Autenticação de usuários com tokens JWT.
+- Winston juntamente com o express-winston para criar e gerenciar registros de logs.
 - CSS para estilização.
 
 ### Personalização do Projeto

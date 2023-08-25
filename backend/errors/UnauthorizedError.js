@@ -2,7 +2,7 @@ import BaseError from './BaseError';
 
 class UnauthorizedError extends BaseError {
   constructor(message) {
-    super(message || 'Não autorizado');
+    super(message || 'Erro de autorização');
     this.name = 'UnauthorizedError';
     this.statusCode = 401;
   }

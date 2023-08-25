@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new UnauthorizedError();
+    throw new UnauthorizedError('Não autorizado');
   }
 
   if (NODE_ENV === 'production' && !JWT_SECRET) {
@@ -18,6 +18,7 @@ const auth = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
+
   const secretKey = NODE_ENV === 'production' ? JWT_SECRET : DEV_JWT_SECRET;
 
   try {
@@ -25,7 +26,7 @@ const auth = (req, res, next) => {
 
     req.user = payload;
   } catch (err) {
-    throw new UnauthorizedError();
+    throw new UnauthorizedError('Não autorizado');
   }
 
   next();

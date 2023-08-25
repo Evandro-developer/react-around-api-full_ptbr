@@ -14,6 +14,12 @@ const app = express();
 
 app.use(cors());
 app.options('*', cors());
+// app.use(
+//   cors({
+//     origin: "https://seu-frontend.com", // Altere para o domínio real do seu frontend
+//   })
+// );
+
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
