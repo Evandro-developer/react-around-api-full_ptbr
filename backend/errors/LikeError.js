@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class LikeError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class LikeError extends BaseError {
   }
 }
 
-export default LikeError;
+module.exports = LikeError;

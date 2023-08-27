@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class PopulationError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class PopulationError extends BaseError {
   }
 }
 
-export default PopulationError;
+module.exports = PopulationError;

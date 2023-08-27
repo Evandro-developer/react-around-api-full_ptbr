@@ -1,11 +1,11 @@
-import Card from '../models/card';
-import formatCard from '../utils/formatCard';
-import CardNotFoundError from '../errors/CardNotFoundError';
-import UnauthorizedError from '../errors/UnauthorizedError';
-import LikeError from '../errors/LikeError';
-import DislikeError from '../errors/DislikeError';
+const Card = require('../models/card');
+const formatCard = require('../utils/formatCard');
+const CardNotFoundError = require('../errors/CardNotFoundError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const LikeError = require('../errors/LikeError');
+const DislikeError = require('../errors/DislikeError');
 
-export const getAllCards = (req, res, next) => {
+const getAllCards = (req, res, next) => {
   Card.find({})
     .populate('likes', 'name about avatar _id')
     .populate('owner', 'name about avatar _id')
@@ -16,7 +16,7 @@ export const getAllCards = (req, res, next) => {
     .catch(next);
 };
 
-export const createCard = (req, res, next) => {
+const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const ownerId = req.user._id;
 
@@ -30,7 +30,7 @@ export const createCard = (req, res, next) => {
     .catch(next);
 };
 
-export const deleteCard = (req, res, next) => {
+const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
   const userId = req.user._id;
 
@@ -55,7 +55,7 @@ export const deleteCard = (req, res, next) => {
     .catch(next);
 };
 
-export const likeCard = (req, res, next) => {
+const likeCard = (req, res, next) => {
   const { cardId } = req.params;
   const userId = req.user._id;
 
@@ -89,7 +89,7 @@ export const likeCard = (req, res, next) => {
     .catch(next);
 };
 
-export const dislikeCard = (req, res, next) => {
+const dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
   const userId = req.user._id;
 
@@ -119,4 +119,12 @@ export const dislikeCard = (req, res, next) => {
       res.json(formattedCard);
     })
     .catch(next);
+};
+
+module.exports = {
+  getAllCards,
+  createCard,
+  deleteCard,
+  likeCard,
+  dislikeCard,
 };

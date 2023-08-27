@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class AuthError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class AuthError extends BaseError {
   }
 }
 
-export default AuthError;
+module.exports = AuthError;

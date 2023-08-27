@@ -1,7 +1,7 @@
-import winston from 'winston';
-import expressWinston from 'express-winston';
-import fs from 'fs';
-import path from 'path';
+const winston = require('winston');
+const expressWinston = require('express-winston');
+const fs = require('fs');
+const path = require('path');
 
 const LOGS_DIRECTORY = './logs';
 
@@ -19,9 +19,7 @@ const loggerOptions = (filename) => ({
   format: winston.format.json(),
 });
 
-export const httpRequestLogger = expressWinston.logger(
-  loggerOptions('/request.log'),
-);
-export const httpErrorLogger = expressWinston.errorLogger(
-  loggerOptions('/error.log'),
-);
+const httpRequestLogger = expressWinston.logger(loggerOptions('/request.log'));
+const httpErrorLogger = expressWinston.errorLogger(loggerOptions('/error.log'));
+
+module.exports = { httpRequestLogger, httpErrorLogger };

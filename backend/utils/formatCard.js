@@ -1,4 +1,4 @@
-import PopulationError from '../errors/PopulationError';
+const PopulationError = require('../errors/PopulationError');
 
 const formatCard = (populatedCard) => {
   if (!populatedCard) {
@@ -25,4 +25,4 @@ const formatCard = (populatedCard) => {
   };
 };
 
-export default formatCard;
+module.exports = formatCard;

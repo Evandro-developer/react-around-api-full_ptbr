@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import UnauthorizedError from '../errors/UnauthorizedError';
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+const UnauthorizedError = require('../errors/UnauthorizedError');
 
 dotenv.config();
 
@@ -32,4 +32,4 @@ const auth = (req, res, next) => {
   next();
 };
 
-export default auth;
+module.exports = auth;

@@ -1,11 +1,11 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import User from '../models/user';
-import UnauthorizedError from '../errors/UnauthorizedError';
-import UserNotFoundError from '../errors/UserNotFoundError';
-import ConflictError from '../errors/ConflictError';
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models/user');
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const UserNotFoundError = require('../errors/UserNotFoundError');
+const ConflictError = require('../errors/ConflictError');
 
-export const getAllUsers = (req, res, next) => {
+const getAllUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
       if (!users) {
@@ -16,7 +16,7 @@ export const getAllUsers = (req, res, next) => {
     .catch(next);
 };
 
-export const getCurrentUser = (req, res, next) => {
+const getCurrentUser = (req, res, next) => {
   const userId = req.user._id;
 
   User.findById(userId)
@@ -37,7 +37,7 @@ export const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
-export const getUserById = (req, res, next) => {
+const getUserById = (req, res, next) => {
   const { userId } = req.params;
 
   User.findById(userId)
@@ -52,7 +52,7 @@ export const getUserById = (req, res, next) => {
     .catch(next);
 };
 
-export const createUser = (req, res, next) => {
+const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
@@ -70,7 +70,7 @@ export const createUser = (req, res, next) => {
     .catch(next);
 };
 
-export const updateUserProfile = (req, res, next) => {
+const updateUserProfile = (req, res, next) => {
   const { name, about } = req.body;
   const userId = req.user._id;
 
@@ -90,7 +90,7 @@ export const updateUserProfile = (req, res, next) => {
     .catch(next);
 };
 
-export const updateUserAvatar = (req, res, next) => {
+const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   const userId = req.user._id;
 
@@ -111,7 +111,7 @@ export const updateUserAvatar = (req, res, next) => {
     .catch(next);
 };
 
-export const register = (req, res, next) => {
+const register = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email })
@@ -141,7 +141,7 @@ export const register = (req, res, next) => {
     .catch(next);
 };
 
-export const login = (req, res, next) => {
+const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -152,4 +152,15 @@ export const login = (req, res, next) => {
       return res.send({ token });
     })
     .catch(next);
+};
+
+module.exports = {
+  getAllUsers,
+  getCurrentUser,
+  getUserById,
+  createUser,
+  updateUserProfile,
+  updateUserAvatar,
+  register,
+  login,
 };

@@ -1,18 +1,22 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import { celebrate } from 'celebrate';
-import { httpRequestLogger, httpErrorLogger } from './middleware/logger';
-import auth from './middleware/auth';
-import usersRoutes from './routes/users';
-import cardsRoutes from './routes/cards';
-import { createUser, login } from './controllers/users';
-import BaseError from './errors/BaseError';
-import { validateUserSignup, validateUserLogin } from './utils/validations';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const celebrate = require('celebrate');
+const { httpRequestLogger, httpErrorLogger } = require('./middleware/logger');
+const auth = require('./middleware/auth');
+const usersRoutes = require('./routes/users');
+const cardsRoutes = require('./routes/cards');
+const { createUser, login } = require('./controllers/users');
+const BaseError = require('./errors/BaseError');
+const {
+  validateUserSignup,
+  validateUserLogin,
+} = require('./utils/validations');
 
 const app = express();
 
-app.use(cors());
+const PORT = process.env.PORT || 3000;
+
 app.use(
   cors({
     origin: [
@@ -28,7 +32,7 @@ app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect('mongodb://localhost:27017/aroundb', {
+  .connect('mongodb://127.0.0.1:27017/aroundb', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -81,4 +85,28 @@ app.use((err, req, res, next) => {
   return res.status(500).json({ message: 'Erro Interno do Servidor' });
 });
 
-export default app;
+app.listen(PORT, () => {
+  console.log(`Servidor escutando em http://127.0.0.1:${PORT}`);
+});
+
+module.exports = app;
+
+// app.listen(PORT, IP, () => {
+//   console.log(`Servidor escutando em http://${IP}:${PORT}`);
+// });
+
+// const IP = process.env.IP || "0.0.0.0";
+
+// const corsOptions = {
+//   origin: "http://localhost:3000", // Ou qualquer outra origem que você precisa permitir
+//   optionsSuccessStatus: 200, // Algumas versões do CORS exigem esse campo
+// };
+
+// app.options("*", cors(corsOptions));
+// app.use(cors(corsOptions));
+
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000", // Ou qualquer outra origem que você precisa permitir
+//   })
+// );

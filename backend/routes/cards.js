@@ -1,16 +1,16 @@
-import express from 'express';
-import {
+const express = require('express');
+const {
   getAllCards,
   createCard,
   deleteCard,
   likeCard,
   dislikeCard,
-} from '../controllers/cards';
-import {
+} = require('../controllers/cards');
+const {
   validateAuthorizationHeader,
   validateCardCreation,
   validateCardId,
-} from '../utils/validations';
+} = require('../utils/validations');
 
 const router = express.Router();
 
@@ -23,4 +23,4 @@ router.delete('/:cardId', validateCardId, deleteCard);
 router.put('/likes/:cardId', validateCardId, likeCard);
 router.delete('/likes/:cardId', validateCardId, dislikeCard);
 
-export default router;
+module.exports = router;

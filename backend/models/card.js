@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const avatarRegex = /^(https?:\/\/)?(www\.)?[\w\d.-]+(:\d+)?(\/[\w\d._~:/?%#[\]@!$&'()*+,;=-]*)?(#\w*)?$/i;
 
@@ -34,4 +34,4 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('card', cardSchema);
+module.exports = mongoose.model('card', cardSchema);

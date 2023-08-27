@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class UserNotFoundError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class UserNotFoundError extends BaseError {
   }
 }
 
-export default UserNotFoundError;
+module.exports = UserNotFoundError;

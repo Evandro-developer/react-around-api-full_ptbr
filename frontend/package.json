@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploy-server": "npm run build && scp -r build/* evandrodmoe@35.199.111.171:/home/evandrodmoe/frontend"
   },
   "eslintConfig": {
     "extends": [

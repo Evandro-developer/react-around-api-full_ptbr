@@ -3,10 +3,9 @@
   "version": "2.0.0",
   "description": "Projeto 16: Servidor API Rest para aplicativo usando Node.js, Express e MongoDB.",
   "main": "app.js",
-  "type": "module",
   "scripts": {
     "lint": "eslint . --fix",
-    "start": "node --es-module-specifier-resolution=node index.js",
+    "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "jest"
   },

@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class CardNotFoundError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class CardNotFoundError extends BaseError {
   }
 }
 
-export default CardNotFoundError;
+module.exports = CardNotFoundError;

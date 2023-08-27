@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class UnauthorizedError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class UnauthorizedError extends BaseError {
   }
 }
 
-export default UnauthorizedError;
+module.exports = UnauthorizedError;

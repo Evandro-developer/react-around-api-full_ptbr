@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class ConflictError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class ConflictError extends BaseError {
   }
 }
 
-export default ConflictError;
+module.exports = ConflictError;

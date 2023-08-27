@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class DislikeError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class DislikeError extends BaseError {
   }
 }
 
-export default DislikeError;
+module.exports = DislikeError;

@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
-import validator from 'validator';
-import bcrypt from 'bcryptjs';
-import UnauthorizedError from '../errors/UnauthorizedError';
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
+const UnauthorizedError = require('../errors/UnauthorizedError');
 
-export const avatarRegex = /^(https?:\/\/)?(www\.)?[\w\d.-]+(:\d+)?(\/[\w\d._~:/?%#[\]@!$&'()*+,;=-]*)?(#\w*)?$/i;
+const avatarRegex = /^(https?:\/\/)?(www\.)?[\w\d.-]+(:\d+)?(\/[\w\d._~:/?%#[\]@!$&'()*+,;=-]*)?(#\w*)?$/i;
 
-export const emailRegex = /^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$/;
+const emailRegex = /^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$/;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -77,4 +77,8 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(
     });
 };
 
-export default mongoose.model('User', userSchema);
+module.exports = {
+  User: mongoose.model('User', userSchema),
+  avatarRegex,
+  emailRegex,
+};

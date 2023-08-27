@@ -1,4 +1,4 @@
-import BaseError from './BaseError';
+const BaseError = require('./BaseError');
 
 class ServerError extends BaseError {
   constructor(message) {
@@ -8,4 +8,4 @@ class ServerError extends BaseError {
   }
 }
 
-export default ServerError;
+module.exports = ServerError;

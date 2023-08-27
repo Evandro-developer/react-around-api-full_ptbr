@@ -1,17 +1,17 @@
-import express from 'express';
-import {
+const express = require('express');
+const {
   getAllUsers,
   getCurrentUser,
   getUserById,
   updateUserProfile,
   updateUserAvatar,
-} from '../controllers/users';
-import {
+} = require('../controllers/users');
+const {
   validateAuthorizationHeader,
   validateUserId,
   validateUserProfile,
   validateUserAvatar,
-} from '../utils/validations';
+} = require('../utils/validations');
 
 const router = express.Router();
 
@@ -24,4 +24,4 @@ router.get('/:userId', validateUserId, getUserById);
 router.patch('/me', validateUserProfile, updateUserProfile);
 router.patch('/me/avatar', validateUserAvatar, updateUserAvatar);
 
-export default router;
+module.exports = router;
