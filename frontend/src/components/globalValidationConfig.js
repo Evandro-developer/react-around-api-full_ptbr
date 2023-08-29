@@ -31,14 +31,13 @@ export const globalValidationConfig = {
     required: true,
     errorMessage: "Email é requerido",
     pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-    patternErrorMessage:
-      "Email não é válido, Informe um e-mail no formato 'nome@dominio.com'.",
+    patternErrorMessage: "Informe um e-mail no formato 'nome@dominio.com'.",
   },
   password: {
     required: true,
     errorMessage: "Senha é requerida",
-    minLength: 8,
-    minLengthErrorMessage: "Senha deve ter pelo menos 8 caracteres",
+    minLength: 6,
+    minLengthErrorMessage: "Senha deve ter pelo menos 6 caracteres",
     maxLength: 100,
     maxLengthErrorMessage: "Senha deve ter no máximo 100 caracteres",
   },

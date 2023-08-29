@@ -2,7 +2,7 @@
   width: 430px;
   height: 330px;
   margin: 0;
-  padding: 0;
+  padding: 60px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,5 +16,6 @@
   .auth-container__form {
     max-width: 282px;
     max-height: 282px;
+    padding: 0;
   }
 }

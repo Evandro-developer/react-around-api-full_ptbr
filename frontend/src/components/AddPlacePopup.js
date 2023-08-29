@@ -93,6 +93,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     >
       <label className="popup__field">
         <TextInput
+          context="popup"
           type="text"
           fieldName="name"
           validity={validity}
@@ -107,6 +108,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       </label>
       <label className="popup__field">
         <TextInput
+          context="popup"
           type="url"
           fieldName="link"
           validity={validity}

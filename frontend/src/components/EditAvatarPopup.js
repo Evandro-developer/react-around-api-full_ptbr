@@ -78,6 +78,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     >
       <label className="popup__field">
         <TextInput
+          context="popup"
           type="url"
           fieldName="avatar"
           validity={validity}

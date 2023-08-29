@@ -88,6 +88,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       <label className="popup__field">
         <TextInput
           type="text"
+          context="popup"
           fieldName="name"
           validity={validity}
           inputActive={inputActive}
@@ -102,6 +103,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       <label className="popup__field">
         <TextInput
           type="text"
+          context="popup"
           fieldName="about"
           validity={validity}
           inputActive={inputActive}

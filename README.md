@@ -1,4 +1,4 @@
-# Projeto 16: React Around API Full (Refatorado)
+# Projeto 16: React Around API Full
 ## Descrição do Projeto:
 Este é o projeto final do curso de desenvolvimento web da Practicum, que consiste em um aplicativo completo chamado "React Around API Full". O projeto é uma evolução do projeto "Around The U.S." desenvolvido anteriormente, com a adição de um back-end e outras funcionalidades avançadas.
 
@@ -43,6 +43,22 @@ Este é o projeto final do curso de desenvolvimento web da Practicum, que consis
 - Winston juntamente com o express-winston para criar e gerenciar registros de logs.
 - CSS para estilização.
 
+## Hospedagem no Google Cloud
+
+Este projeto foi hospedado no Google Cloud para que você possa acessá-lo online. O backend do aplicativo foi implantado em uma instância do Google Compute Engine, enquanto o frontend está hospedado no Google Cloud Storage. Isso permite que você experimente o aplicativo sem precisar configurar nada localmente.
+
+### Acesso ao Aplicativo
+
+Para acessar o aplicativo hospedado, visite [https://aroundfinal.com.br](https://aroundfinal.com.br). Lá você encontrará a versão online do aplicativo, onde poderá criar, editar e gerenciar cartões de viagem, além de explorar as funcionalidades disponíveis.
+
+### Observações
+
+- Certifique-se de estar usando um navegador atualizado para obter a melhor experiência ao utilizar o aplicativo hospedado.
+- Caso encontre qualquer problema ou tenha feedback sobre a hospedagem, sinta-se à vontade para nos informar através das Issues deste repositório.
+
+Agradecemos por visitar o aplicativo hospedado no Google Cloud!
+
+
 ### Personalização do Projeto
 - Para personalizar o aplicativo, você pode modificar os estilos CSS no diretório src/blocks.
 - Personalize as mensagens de erro e validações de formulários no diretório src/utils.
@@ -50,10 +66,8 @@ Este é o projeto final do curso de desenvolvimento web da Practicum, que consis
 ### Licença
 - Este projeto é open source. Você é livre para usar e modificar, desde que mantenha a atribuição dos autores originais.
 
-### Links do Projeto
-- Código-fonte do projeto front-end: https://github.com/Evandro-developer/react-around-api-full_ptbr
-- Página web do projeto front-end: https://github.com/Evandro-developer/react-around-api-full_ptbr
-- Código-fonte do projeto back-end: https://github.com/Evandro-developer/react-around-api-full_ptbr
+### Link para o código fonte do Projeto
+- Código-fonte do projeto: https://github.com/Evandro-developer/react-around-api-full_ptbr
 
 #### Agradecimentos
 - Agradecemos por acompanhar o desenvolvimento deste projeto.

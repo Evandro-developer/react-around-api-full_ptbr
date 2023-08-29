@@ -23,12 +23,34 @@ function PopupWithForm({
     setIsClosing(true);
   };
 
+  const handleEscapeKey = (e) => {
+    if (e.key === "Escape") {
+      setIsClosing(true);
+    }
+  };
+
+  const handleClickOutside = (e) => {
+    if (e.target.classList.contains("popup__opened")) {
+      onClose();
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       setIsMounted(true);
+      setIsClosing(false);
+      window.addEventListener("keydown", handleEscapeKey);
+      document.addEventListener("click", handleClickOutside);
     } else {
       setIsClosing(true);
+      window.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("click", handleClickOutside);
     }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -53,6 +75,7 @@ function PopupWithForm({
         isClosing ? "popup__closed" : ""
       }`}
     >
+      <div className="popup__opened" onClick={handleClickOutside} />
       <form
         className={`popup__form ${formClassName}`}
         id={formClassName}

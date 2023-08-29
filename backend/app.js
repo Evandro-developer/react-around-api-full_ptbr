@@ -15,18 +15,9 @@ const {
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const { PORT } = process.env;
 
-app.use(
-  cors({
-    origin: [
-      'https://api.aroundfinal.com.br',
-      'https://aroundfinal.com.br',
-      'https://www.aroundfinal.com.br',
-    ],
-    optionsSuccessStatus: 200,
-  }),
-);
+app.use(cors());
 
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
@@ -44,13 +35,6 @@ mongoose
   });
 
 app.use(httpRequestLogger);
-
-// Server crash testing for review
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Server will crash now');
-  }, 0);
-});
 
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
@@ -90,23 +74,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
-// app.listen(PORT, IP, () => {
-//   console.log(`Servidor escutando em http://${IP}:${PORT}`);
-// });
-
-// const IP = process.env.IP || "0.0.0.0";
-
-// const corsOptions = {
-//   origin: "http://localhost:3000", // Ou qualquer outra origem que você precisa permitir
-//   optionsSuccessStatus: 200, // Algumas versões do CORS exigem esse campo
-// };
-
-// app.options("*", cors(corsOptions));
-// app.use(cors(corsOptions));
-
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000", // Ou qualquer outra origem que você precisa permitir
-//   })
-// );

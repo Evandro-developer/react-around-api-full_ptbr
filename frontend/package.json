@@ -2,7 +2,7 @@
   "name": "react-around-api-full_ptbr",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://evandro-developer.github.io/react-around-api-full_ptbr",
+  "homepage": "https://aroundfinal.com.br",
   "description": "Projeto 16: Website Responsivo utilizando React, Webpack e Babel para desenvolvimento front-end.",
   "author": "Evandro de Melo Oliveira",
   "dependencies": {
@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deploy-server": "npm run build && scp -r build/* evandrodmoe@35.199.111.171:/home/evandrodmoe/frontend"
+    "deploy-server": "npm run build && scp -r build/* evandrodmoe@35.199.111.171:/home/evandrodmoe/frontend/"
   },
   "eslintConfig": {
     "extends": [

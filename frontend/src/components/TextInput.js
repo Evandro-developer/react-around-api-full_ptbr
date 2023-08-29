@@ -2,6 +2,7 @@ import React from "react";
 
 function TextInput({
   type = "text",
+  context = "",
   fieldName,
   validity,
   inputActive,
@@ -11,17 +12,25 @@ function TextInput({
   onBlur,
   placeholder,
 }) {
-  let classes = "popup__input";
+  let classes = context === "popup" ? "popup__input" : "auth-container__input";
 
   if (!validity[fieldName]) {
-    classes += " popup__input_type_error";
+    classes +=
+      context === "popup"
+        ? " popup__input_type_error"
+        : " auth-container__input_type_error";
   }
+
   if (inputActive[fieldName]) {
-    classes += " popup__input_active";
+    classes +=
+      context === "popup"
+        ? " popup__input_active"
+        : " auth-container__input_active";
   }
 
   return (
     <input
+      context={""}
       type={type}
       className={classes}
       name={fieldName}

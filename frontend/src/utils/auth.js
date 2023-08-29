@@ -78,5 +78,3 @@ class Auth {
 const auth = new Auth("https://api.aroundfinal.com.br");
 
 export default auth;
-
-// const auth = new Auth("http://127.0.0.1:3001");

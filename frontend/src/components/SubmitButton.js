@@ -1,10 +1,20 @@
 import React from "react";
 
-function SubmitButton({ type, className, id, children, isFormValid }) {
+function SubmitButton({
+  type,
+  context = "",
+  className,
+  id,
+  children,
+  isFormValid,
+}) {
   let classes = className;
 
   if (!isFormValid) {
-    classes += " popup__button_disabled";
+    classes +=
+      context === "auth" ? " button-auth_disabled" : " popup__button_disabled";
+  } else {
+    classes += context === "auth" ? " button-auth" : " popup__button";
   }
 
   return (

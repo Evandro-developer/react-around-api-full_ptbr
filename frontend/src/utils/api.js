@@ -147,7 +147,3 @@ const api = new Api({
 });
 
 export default api;
-
-// const api = new Api({
-//   baseUrl: "http://127.0.0.1:3001",
-// });

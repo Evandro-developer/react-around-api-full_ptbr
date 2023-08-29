@@ -1,11 +1,13 @@
 * {
   transition: 0.3s ease-in-out;
   text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 
 .popup__input_active {
   border-bottom-color: rgba(255, 0, 0);
-  margin: 0;
+
   opacity: 0.8;
   pointer-events: auto; /* Adicione essa propriedade */
 }
