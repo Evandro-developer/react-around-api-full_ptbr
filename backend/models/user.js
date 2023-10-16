@@ -2,35 +2,38 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const UnauthorizedError = require('../errors/UnauthorizedError');
+const { emailRegex, urlRegex } = require('../utils/validations');
 
-const avatarRegex = /^(https?:\/\/)?(www\.)?[\w\d.-]+(:\d+)?(\/[\w\d._~:/?%#[\]@!$&'()*+,;=-]*)?(#\w*)?$/i;
-
-const emailRegex = /^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$/;
+const defaultValues = {
+  name: 'Jacques Cousteau',
+  about: 'Explorer',
+  avatar: 'https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg',
+};
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    default: 'Jacques Cousteau',
+    default: defaultValues.name,
     required: true,
     minlength: 2,
     maxlength: 30,
   },
   about: {
     type: String,
-    default: 'Explorer',
+    default: defaultValues.about,
     required: true,
     minlength: 2,
     maxlength: 30,
   },
   avatar: {
     type: String,
-    default: 'https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg',
+    default: defaultValues.avatar,
     required: true,
     trim: true,
     lowercase: true,
     validate: [
       {
-        validator: (value) => avatarRegex.test(value) || validator.isURL(value),
+        validator: (value) => urlRegex.test(value) || validator.isURL(value),
         message: 'URL de avatar inválida',
       },
     ],
@@ -77,8 +80,4 @@ userSchema.statics.findUserByCredentials = function findUserByCredentials(
     });
 };
 
-module.exports = {
-  User: mongoose.model('User', userSchema),
-  avatarRegex,
-  emailRegex,
-};
+module.exports = mongoose.model('User', userSchema);

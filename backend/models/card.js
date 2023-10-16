@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const avatarRegex = /^(https?:\/\/)?(www\.)?[\w\d.-]+(:\d+)?(\/[\w\d._~:/?%#[\]@!$&'()*+,;=-]*)?(#\w*)?$/i;
+const { urlRegex } = require('../utils/validations');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -14,7 +13,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(value) {
-        return avatarRegex.test(value);
+        return urlRegex.test(value);
       },
       message: 'URL de imagem inválida',
     },

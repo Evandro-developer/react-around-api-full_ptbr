@@ -6,7 +6,7 @@ const LikeError = require('../errors/LikeError');
 const DislikeError = require('../errors/DislikeError');
 
 const getAllCards = (req, res, next) => {
-  Card.find({})
+  Card.find()
     .populate('likes', 'name about avatar _id')
     .populate('owner', 'name about avatar _id')
     .then((cards) => {

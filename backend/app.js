@@ -1,12 +1,11 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const helmet = require("helmet");
 const celebrate = require("celebrate");
 const { httpRequestLogger, httpErrorLogger } = require("./middleware/logger");
-const auth = require("./middleware/auth");
-const usersRoutes = require("./routes/users");
-const cardsRoutes = require("./routes/cards");
+const limiter = require("./utils/limiter");
+const routes = require("./routes/index");
 const { createUser, login } = require("./controllers/users");
 const BaseError = require("./errors/BaseError");
 const {
@@ -14,24 +13,40 @@ const {
   validateUserLogin,
 } = require("./utils/validations");
 
-const app = express();
+require("dotenv-flow").config();
 
-const PORT = process.env.PORT || 3000;
+const app = express();
+const PORT = process.env.PORT;
+
+const isProduction = process.env.NODE_ENV === "production";
 
 const corsOptions = {
-  origin: ["https://aroundfinal.com.br", "https://www.aroundfinal.com.br"],
+  origin: [
+    "https://aroundfinal.com.br",
+    "https://www.aroundfinal.com.br",
+    "https://reactjs.aroundfinal.com.br",
+    "https://www.reactjs.aroundfinal.com.br",
+    "https://vanillajs.aroundfinal.com.br",
+    "https://www.vanillajs.aroundfinal.com.br",
+  ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(isProduction ? corsOptions : {}));
+app.options("*", cors(isProduction ? corsOptions : {}));
+app.use(helmet());
 
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
+console.log("Node Environment:", process.env.NODE_ENV);
+console.log("API URL:", process.env.API_URL);
+console.log("PORT:", process.env.PORT);
+
 mongoose
-  .connect("mongodb://127.0.0.1:27017/aroundb", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -44,11 +59,11 @@ mongoose
 
 app.use(httpRequestLogger);
 
-app.use("/users", auth, usersRoutes);
-app.use("/cards", auth, cardsRoutes);
+// Aplica o limitador de taxa as rotas /signup e /signin
+app.post("/signup", limiter, validateUserSignup, createUser);
+app.post("/signin", limiter, validateUserLogin, login);
 
-app.post("/signup", validateUserSignup, createUser);
-app.post("/signin", validateUserLogin, login);
+app.use("/", routes);
 
 app.use(httpErrorLogger);
 

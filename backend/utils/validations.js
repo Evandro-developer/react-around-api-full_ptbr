@@ -1,6 +1,12 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
-const { emailRegex, avatarRegex } = require('../models/user');
+
+const urlRegex = /^(https?:\/\/)?(www\.)?[\w\d.-]+(:\d+)?(\/[\w\d._~:/?%#[\]@!$&'()*+,;=-]*)?(#\w*)?$/i;
+
+const emailRegex = /^[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}$/;
+
+exports.urlRegex = urlRegex;
+exports.emailRegex = emailRegex;
 
 // Validador personalizado para URLs
 exports.validateURL = (value, helpers) => {
@@ -37,7 +43,7 @@ exports.validateUserAvatar = celebrate({
   body: Joi.object().keys({
     avatar: Joi.string()
       .required()
-      .pattern(avatarRegex)
+      .pattern(urlRegex)
       .custom(exports.validateURL, 'URL de avatar inválida'),
   }),
 });
@@ -48,7 +54,7 @@ exports.validateUserSignup = celebrate({
     name: Joi.string().min(2).max(30).optional(),
     about: Joi.string().min(2).max(30).optional(),
     avatar: Joi.string()
-      .pattern(avatarRegex)
+      .pattern(urlRegex)
       .custom(exports.validateURL)
       .optional(),
     email: Joi.string().required().pattern(emailRegex),
