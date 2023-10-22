@@ -22,3 +22,4 @@ package-lock.json
 .ecosystem.config.js
 
 package-lock.json
+node_modules/
