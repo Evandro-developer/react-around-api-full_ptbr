@@ -1,1 +1,24 @@
 backend/.env.production
+backend/.env
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Diretório de dependências
+node_modules
+
+# Diretório de cache npm opcional
+.npm
+
+# Arquivos do sistema e pastas de configurações IDE
+.DS_Store
+.idea
+.vscode
+package-lock.json
+.env
+.env.production
+.env.development
+.ecosystem.config.js
+
+package-lock.json
