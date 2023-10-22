@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Routes, Route, Navigate } from "react-router-dom";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-import api from "../utils/api";
-import auth from "../utils/auth";
+import api from "../api/Api";
+import auth from "../api/Auth";
 
 import Login from "./Login";
 import Register from "./Register";
@@ -32,6 +32,8 @@ function App() {
   const [cards, setCardsList] = useState([]);
   const [cardToDelete, setCardToDelete] = useState(null);
 
+  const [formType, setFormType] = useState("login");
+
   const navigate = useNavigate();
 
   const handleEditAvatarClick = () => {
@@ -56,21 +58,21 @@ function App() {
   };
 
   const handleUpdateUser = (newUser) => {
-    api.setUserInfo(newUser.name, newUser.about).then((updatedUser) => {
+    api.addNewUserInfo(newUser.name, newUser.about).then((updatedUser) => {
       setCurrentUser(updatedUser);
       closeAllPopups();
     });
   };
 
   const handleUpdateAvatar = (newAvatar) => {
-    api.setUserAvatar(newAvatar.avatar).then((updatedAvatar) => {
+    api.addNewUserInfoAvatar(newAvatar.avatar).then((updatedAvatar) => {
       setCurrentUser(updatedAvatar);
       closeAllPopups();
     });
   };
 
   const handleAddPlace = (newCard) => {
-    api.addNewCard(newCard.name, newCard.link).then((newCard) => {
+    api.addNewCard(newCard.placeName, newCard.link).then((newCard) => {
       setCardsList([newCard, ...cards]);
       closeAllPopups();
     });
@@ -137,8 +139,8 @@ function App() {
 
     if (token) {
       setLoggedIn(true);
-      api.getCardsList().then((response) => {
-        setCardsList(response);
+      api.getAllCards().then((response) => {
+        setCardsList([...response].reverse());
       });
 
       api.getUserInfo().then((response) => {
@@ -169,6 +171,8 @@ function App() {
               path="/signup"
               element={
                 <Register
+                  formType={formType}
+                  setFormType={setFormType}
                   email={userEmail}
                   setEmail={setUserEmail}
                   password={password}
@@ -186,6 +190,8 @@ function App() {
               path="/signin"
               element={
                 <Login
+                  formType={formType}
+                  setFormType={setFormType}
                   email={userEmail}
                   setEmail={setUserEmail}
                   password={password}
@@ -225,6 +231,8 @@ function App() {
           )}
           {loggedIn && activePopup === "editProfile" && (
             <EditProfilePopup
+              formType={formType}
+              setFormType={setFormType}
               isOpen={true}
               onClose={closeAllPopups}
               onUpdateUser={handleUpdateUser}
@@ -233,6 +241,8 @@ function App() {
           )}
           {loggedIn && activePopup === "editAvatar" && (
             <EditAvatarPopup
+              formType={formType}
+              setFormType={setFormType}
               isOpen={true}
               onClose={closeAllPopups}
               onUpdateAvatar={handleUpdateAvatar}
@@ -240,6 +250,8 @@ function App() {
           )}
           {loggedIn && activePopup === "addPlace" && (
             <AddPlacePopup
+              formType={formType}
+              setFormType={setFormType}
               isOpen={true}
               onClose={closeAllPopups}
               onAddPlace={handleAddPlace}
@@ -247,6 +259,8 @@ function App() {
           )}
           {loggedIn && activePopup === "confirmation" && (
             <ConfirmationPopup
+              formType={formType}
+              setFormType={setFormType}
               isOpen={true}
               onClose={closeAllPopups}
               onConfirm={handleCardDeleteConfirm}

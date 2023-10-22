@@ -11,7 +11,7 @@ function Profile({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick }) {
   const { currentUser } = useContext(CurrentUserContext);
 
   return (
-    <div className="profile">
+    <section className="profile">
       <div className="profile__container">
         <div className="profile__avatar-edit">
           <picture>
@@ -60,7 +60,7 @@ function Profile({ onEditAvatarClick, onEditProfileClick, onAddPlaceClick }) {
           onClick={onAddPlaceClick}
         />
       </picture>
-    </div>
+    </section>
   );
 }
 

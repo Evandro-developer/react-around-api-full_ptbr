@@ -17,10 +17,10 @@ const getAllCards = (req, res, next) => {
 };
 
 const createCard = (req, res, next) => {
-  const { name, link } = req.body;
+  const { placeName, link } = req.body;
   const ownerId = req.user._id;
 
-  Card.create({ name, link, owner: ownerId })
+  Card.create({ placeName, link, owner: ownerId })
     .then((savedCard) => Card.findById(savedCard._id).populate('owner', 'name about avatar _id'))
     .then((populatedCard) => {
       const formattedCard = formatCard(populatedCard);

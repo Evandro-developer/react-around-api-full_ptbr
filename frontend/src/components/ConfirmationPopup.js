@@ -1,11 +1,9 @@
 import React from "react";
 
 import PopupWithForm from "./PopupWithForm";
-import SubmitButton from "./SubmitButton";
-import FormValidator from "./FormValidator";
+import ButtonSubmit from "./ButtonSubmit";
 
 function ConfirmationPopup({ isOpen, onClose, onConfirm }) {
-  const formValidator = FormValidator();
   const handleSubmit = () => {
     onConfirm();
   };
@@ -19,14 +17,13 @@ function ConfirmationPopup({ isOpen, onClose, onConfirm }) {
       name="popup_with-confirmation"
       formClassName="popup__form_with-confirmation"
     >
-      <SubmitButton
-        type="submit"
+      <ButtonSubmit
         className="popup__button popup__button_with-confirmation"
         id="popup__button_with-confirmation"
-        isFormValid={formValidator.isFormValid()}
+        shouldValidate={false}
       >
         Sim
-      </SubmitButton>
+      </ButtonSubmit>
     </PopupWithForm>
   );
 }

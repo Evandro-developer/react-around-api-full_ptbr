@@ -1,44 +1,50 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
 import closeIconSmall from "../images/close_icon_small.png";
 import closeIcon from "../images/close_icon.png";
 
 function ImagePopup({ selectedCard, onCloseImageClick }) {
+  const [isClosing, setIsClosing] = useState(false);
+
   const handleEscapeKey = (e) => {
-    if (e.key === "Escape") {
-      onCloseImageClick();
+    if (e.key === "Escape" && selectedCard && !isClosing) {
+      startClosingAnimation();
     }
   };
 
   const handleClickOutside = (e) => {
-    if (e.target.classList.contains("img-popup-card__opened")) {
-      onCloseImageClick();
+    if (e.target.classList.contains("img-popup-card__opened") && !isClosing) {
+      startClosingAnimation();
     }
+  };
+
+  const startClosingAnimation = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onCloseImageClick();
+    }, 300);
   };
 
   useEffect(() => {
     if (selectedCard) {
       window.addEventListener("keydown", handleEscapeKey);
       document.addEventListener("click", handleClickOutside);
-    } else {
-      window.removeEventListener("keydown", handleEscapeKey);
-      document.removeEventListener("click", handleClickOutside);
     }
 
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [selectedCard]);
+  }, [selectedCard, isClosing]);
 
-  if (!selectedCard) {
+  if (!selectedCard && !isClosing) {
     return null;
   }
 
   return (
     <section
       className={`img-popup-card ${
-        selectedCard ? "img-popup-card__opened" : ""
+        isClosing ? "img-popup-card" : "img-popup-card__opened"
       }`}
       id="img-popup-card"
     >
@@ -59,7 +65,7 @@ function ImagePopup({ selectedCard, onCloseImageClick }) {
             alt="Imagem do ícone de fechamento da janela do popup"
             className="img-popup-card__closed-btn"
             id="img-popup-card__closed-btn"
-            onClick={onCloseImageClick}
+            onClick={startClosingAnimation}
           />
         </picture>
       </div>

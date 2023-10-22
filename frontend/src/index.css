@@ -29,7 +29,7 @@
 @import url(./blocks/auth-container/__input/auth-container__input.css);
 @import url(./blocks/auth-container/__input/_active/auth-container__input_active.css);
 @import url(./blocks/auth-container/__input/_type/auth-container__input_type_error.css);
-@import url(./blocks/auth-container/__auth-container-error/auth-container__input-error.css);
+@import url(./blocks/auth-container/__input-error/auth-container__input-error.css);
 @import url(./blocks/auth-container/__error/auth-container__error.css);
 @import url(./blocks/auth-container/__error/_visible/auth-container__error_visible.css);
 @import url(./blocks/auth-container/__link/auth-container__link);

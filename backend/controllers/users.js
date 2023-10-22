@@ -1,10 +1,10 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const UnauthorizedError = require("../errors/UnauthorizedError");
-const UserNotFoundError = require("../errors/UserNotFoundError");
-const EmailAlreadyInUseError = require("../errors/EmailAlreadyInUseError");
-const ConflictError = require("../errors/ConflictError");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const UnauthorizedError = require('../errors/UnauthorizedError');
+const UserNotFoundError = require('../errors/UserNotFoundError');
+const EmailAlreadyInUseError = require('../errors/EmailAlreadyInUseError');
+const ConflictError = require('../errors/ConflictError');
 
 const getAllUsers = (req, res, next) => {
   User.find()
@@ -45,7 +45,7 @@ const getUserById = (req, res, next) => {
     .then((user) => {
       if (!user) {
         throw new UserNotFoundError(
-          "Nenhum usuário com ID correspondente encontrado."
+          'Nenhum usuário com ID correspondente encontrado.',
         );
       }
       return res.json(user);
@@ -54,9 +54,11 @@ const getUserById = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  console.log("Request Body:", req.body); // Para verificar os dados recebidos na solicitação
+  console.log('Request Body:', req.body); // Para verificar os dados recebidos na solicitação
 
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
 
   // Primeiro, verifique se o e-mail já está em uso
   User.findOne({ email })
@@ -68,15 +70,13 @@ const createUser = (req, res, next) => {
       // Se não, continue para criar um novo usuário
       return bcrypt
         .hash(password, 8)
-        .then((hash) =>
-          User.create({
-            name,
-            about,
-            avatar,
-            email,
-            password: hash,
-          })
-        )
+        .then((hash) => User.create({
+          name,
+          about,
+          avatar,
+          email,
+          password: hash,
+        }))
         .then((savedUser) => res.json(savedUser))
         .catch(next);
     })
@@ -131,7 +131,7 @@ const updateUserAvatar = (req, res, next) => {
 // ser utilizado para autenticar o usuário imediatamente após o registro.
 
 const register = (req, res, next) => {
-  console.log("Request Body:", req.body);
+  console.log('Request Body:', req.body);
   const { email, password } = req.body;
   const SALT_ROUNDS = 10;
 
@@ -146,7 +146,7 @@ const register = (req, res, next) => {
     .then((hash) => User.create({ email, password: hash }))
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
+        expiresIn: '7d',
       });
 
       const response = {
@@ -155,7 +155,7 @@ const register = (req, res, next) => {
           email: user.email,
         },
         token,
-        message: "Usuário cadastrado com sucesso.",
+        message: 'Usuário cadastrado com sucesso.',
       };
       return res.status(201).json(response);
     })
@@ -163,13 +163,13 @@ const register = (req, res, next) => {
 };
 
 const login = (req, res, next) => {
-  console.log("Request Body:", req.body); // Para verificar os dados recebidos na solicitação
+  console.log('Request Body:', req.body);
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
+        expiresIn: '7d',
       });
       return res.send({ token });
     })

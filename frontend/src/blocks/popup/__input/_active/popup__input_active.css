@@ -7,9 +7,7 @@
 
 .popup__input_active {
   border-bottom-color: rgba(255, 0, 0);
-
-  opacity: 0.8;
-  pointer-events: auto; /* Adicione essa propriedade */
+  opacity: 1;
 }
 
 .popup__input_active:focus {
@@ -19,10 +17,12 @@
 
 .popup__input_active:hover {
   border-bottom-color: rgba(255, 0, 0);
-  opacity: 0.4;
+  opacity: 0.6;
+  transition: 0.3s ease-in-out;
 }
 
 .popup__input_active:valid {
   border-bottom-color: #545454;
-  opacity: 0.8;
+  opacity: 1;
+  transition: 0.3s ease-in-out;
 }

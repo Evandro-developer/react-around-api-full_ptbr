@@ -1,104 +1,77 @@
-import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
-import TextInput from "./TextInput";
-import SubmitButton from "./SubmitButton";
-import FormValidator from "./FormValidator";
-import { globalValidationConfig } from "./globalValidationConfig";
+import React, { useEffect } from "react";
+import useFormWithValidation from "./FormValidation";
+import { errorClasses } from "../utils/globalValidationRules";
+import Input from "./Input";
+import ButtonSubmit from "./ButtonSubmit";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const avatarTouched = false;
-  const { avatar: avatarConfig } = globalValidationConfig;
-  const validationConfig = {
-    avatar: avatarConfig,
-  };
-
+function EditAvatarPopup({
+  isOpen,
+  onClose,
+  onUpdateAvatar,
+  formType,
+  setFormType,
+}) {
   const {
-    formData,
-    setFormData,
-    validity,
-    validationMessage,
+    values,
+    errors,
+    isValid,
     inputActive,
-    handleInputFocus,
-    handleInputBlur,
-    handleInputChange,
-    isFormValid,
-  } = FormValidator(validationConfig, { avatar: "" });
+    handleChange,
+    handleBlur,
+    resetForm,
+  } = useFormWithValidation(formType);
 
-  const resetForm = () => {
-    setFormData({ avatar: "" });
-  };
+  const { avatarClassesError, btnPopupSubmitClassError } = errorClasses(
+    errors,
+    isValid,
+    inputActive,
+    formType
+  );
 
-  function handleSubmit() {
-    if (!isFormValid()) {
-      return;
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onUpdateAvatar({
-      avatar: formData.avatar,
+      avatar: values.avatar,
     });
-  }
-
-  function renderError(fieldName) {
-    if (
-      !validity[fieldName] &&
-      (inputActive[fieldName] || (avatarTouched && !formData[fieldName]))
-    ) {
-      return (
-        <span
-          className={`popup__input-error popup-input-type-${fieldName}-error ${
-            !validity[fieldName] ? "popup__error_visible" : ""
-          }`}
-        >
-          {!formData[fieldName]
-            ? validationConfig[fieldName].errorMessage
-            : validationMessage[fieldName]}
-        </span>
-      );
-    }
-    return null;
-  }
+  };
 
   useEffect(() => {
-    if (isOpen) {
-      resetForm();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+    resetForm();
+    setFormType("avatar");
+  }, [resetForm]);
 
   return (
     <PopupWithForm
       isOpen={isOpen}
       onClose={() => {
         onClose();
-        resetForm();
       }}
       onSubmit={handleSubmit}
       title="Alterar a foto do perfil"
       name="popup_avatar-edit"
       formClassName="popup__form_avatar-edit"
     >
-      <label className="popup__field">
-        <TextInput
-          context="popup"
-          type="url"
-          fieldName="avatar"
-          validity={validity}
-          inputActive={inputActive}
-          value={formData.avatar}
-          onChange={handleInputChange}
-          onFocus={() => handleInputFocus("avatar")}
-          onBlur={() => handleInputBlur("avatar")}
-          placeholder="Insira o URL do Avatar"
+      <div className="popup__field">
+        <Input
+          name="avatar"
+          type="text"
+          placeholder="Insira o URL do novo avatar"
+          value={values.avatar || ""}
+          onChange={handleChange}
+          onBlur={() => handleBlur("avatar")}
+          errors={errors.avatar}
+          errorClassName={avatarClassesError}
+          className={`popup__input`}
         />
-        {renderError("avatar")}
-      </label>
-      <SubmitButton
-        type="submit"
-        className="popup__button"
-        id="popup__button_avatar-edit"
-        isFormValid={isFormValid()}
+      </div>
+      <ButtonSubmit
+        className={btnPopupSubmitClassError}
+        isValid={isValid}
+        onClick={(e) => handleSubmit(e)}
       >
         Salvar
-      </SubmitButton>
+      </ButtonSubmit>
     </PopupWithForm>
   );
 }

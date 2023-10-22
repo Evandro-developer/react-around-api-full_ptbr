@@ -73,7 +73,7 @@ exports.validateUserLogin = celebrate({
 // Validador para criar um cartão
 exports.validateCardCreation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30).required(),
+    placeName: Joi.string().min(2).max(30).required(), // Mudou 'name' para 'placeName'
     link: Joi.string()
       .required()
       .custom(exports.validateURL, 'URL de imagem inválida'),

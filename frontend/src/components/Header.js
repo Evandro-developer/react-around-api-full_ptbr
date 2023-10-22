@@ -11,13 +11,13 @@ function Header({ loggedIn, userEmail, onSignOut }) {
     if (location.pathname === "/signup") {
       return (
         <Link className="header__auth-status" to="/signin">
-          Entrar
+          Faça login!
         </Link>
       );
     } else if (location.pathname === "/signin") {
       return (
         <Link className="header__auth-status" to="/signup">
-          Faça o login
+          Cadastre-se!
         </Link>
       );
     } else if (loggedIn) {

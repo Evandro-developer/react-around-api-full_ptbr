@@ -6,10 +6,10 @@ const formatCard = (populatedCard) => {
   }
 
   return {
-    _id: populatedCard._id,
-    name: populatedCard.name,
+    placeName: populatedCard.placeName,
     link: populatedCard.link,
     createdAt: populatedCard.createdAt,
+    _id: populatedCard._id,
     likes: populatedCard.likes.map((like) => ({
       name: like.name,
       about: like.about,
@@ -17,10 +17,10 @@ const formatCard = (populatedCard) => {
       _id: like._id,
     })),
     owner: {
-      _id: populatedCard.owner._id,
       name: populatedCard.owner.name,
       about: populatedCard.owner.about,
       avatar: populatedCard.owner.avatar,
+      _id: populatedCard.owner._id,
     },
   };
 };

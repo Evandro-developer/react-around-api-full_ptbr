@@ -1,128 +1,84 @@
-import React, { useContext, useEffect } from "react";
-
 import PopupWithForm from "./PopupWithForm";
-import TextInput from "./TextInput";
-import SubmitButton from "./SubmitButton";
-import FormValidator from "./FormValidator";
+import React, { useEffect } from "react";
+import useFormWithValidation from "./FormValidation";
+import { errorClasses } from "../utils/globalValidationRules";
+import Input from "./Input";
+import ButtonSubmit from "./ButtonSubmit";
 
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import { globalValidationConfig } from "./globalValidationConfig";
-
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const { currentUser } = useContext(CurrentUserContext);
-  const name = currentUser?.name;
-  const about = currentUser?.about;
-  const nameTouched = false;
-  const aboutTouched = false;
-
-  const { name: nameConfig, about: aboutConfig } = globalValidationConfig;
-  const validationConfig = {
-    name: nameConfig,
-    about: aboutConfig,
-  };
-
+function EditProfilePopup({
+  isOpen,
+  onClose,
+  onUpdateUser,
+  formType,
+  setFormType,
+}) {
   const {
-    formData,
-    setFormData,
-    validity,
-    validationMessage,
+    values,
+    errors,
+    isValid,
     inputActive,
-    handleInputFocus,
-    handleInputBlur,
-    handleInputChange,
-    isFormValid,
-  } = FormValidator(validationConfig, { name, about });
+    handleChange,
+    handleBlur,
+    resetForm,
+  } = useFormWithValidation(formType);
 
-  const resetForm = () => {
-    setFormData({ name: "", about: "" });
+  const { nameClassesError, aboutClassesError, btnPopupSubmitClassError } =
+    errorClasses(errors, isValid, inputActive, formType);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onUpdateUser({ name: values.name, about: values.about });
   };
-
-  function handleSubmit() {
-    if (!isFormValid()) {
-      return;
-    }
-    onUpdateUser({ name: formData.name, about: formData.about });
-  }
-
-  function renderError(fieldName) {
-    if (
-      !validity[fieldName] &&
-      (inputActive[fieldName] ||
-        ((fieldName === "name" ? nameTouched : aboutTouched) &&
-          !formData[fieldName]))
-    ) {
-      return (
-        <span
-          className={`popup__input-error popup-input-type-${fieldName}-error ${
-            !validity[fieldName] ? "popup__error_visible" : ""
-          }`}
-        >
-          {!formData[fieldName]
-            ? validationConfig[fieldName].errorMessage
-            : validationMessage[fieldName]}
-        </span>
-      );
-    }
-    return null;
-  }
 
   useEffect(() => {
-    if (isOpen) {
-      resetForm();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
+    resetForm();
+    setFormType("profile");
+  }, [resetForm]);
 
   return (
     <PopupWithForm
       isOpen={isOpen}
       onClose={() => {
         onClose();
-        resetForm();
       }}
       onSubmit={handleSubmit}
       title="Editar Perfil"
       name="popup"
-      formClassName="popup__form"
+      formClassName="#popup__form"
     >
-      <label className="popup__field">
-        <TextInput
+      <div className="popup__field">
+        <Input
+          name="name"
           type="text"
-          context="popup"
-          fieldName="name"
-          validity={validity}
-          inputActive={inputActive}
-          value={formData.name}
-          onChange={handleInputChange}
-          onFocus={() => handleInputFocus("name")}
-          onBlur={() => handleInputBlur("name")}
-          placeholder={currentUser?.name}
+          placeholder="Insira o nome do Usuário"
+          value={values.name || ""}
+          onChange={handleChange}
+          onBlur={() => handleBlur("name")}
+          errors={errors.name}
+          errorClassName={nameClassesError}
+          className={`popup__input`}
         />
-        {renderError("name")}
-      </label>
-      <label className="popup__field">
-        <TextInput
+      </div>
+      <div className="popup__field">
+        <Input
+          name="about"
           type="text"
-          context="popup"
-          fieldName="about"
-          validity={validity}
-          inputActive={inputActive}
-          value={formData.about}
-          onChange={handleInputChange}
-          onFocus={() => handleInputFocus("about")}
-          onBlur={() => handleInputBlur("about")}
-          placeholder={currentUser?.about}
+          placeholder="Insira a sua Profissão"
+          value={values.about || ""}
+          onChange={handleChange}
+          onBlur={() => handleBlur("about")}
+          errors={errors.about}
+          errorClassName={aboutClassesError}
+          className={`popup__input`}
         />
-        {renderError("about")}
-      </label>
-      <SubmitButton
-        type="submit"
-        className="popup__button"
-        id="popup__button"
-        isFormValid={isFormValid()}
+      </div>
+      <ButtonSubmit
+        className={btnPopupSubmitClassError}
+        isValid={isValid}
+        onClick={(e) => handleSubmit(e)}
       >
         Salvar
-      </SubmitButton>
+      </ButtonSubmit>
     </PopupWithForm>
   );
 }

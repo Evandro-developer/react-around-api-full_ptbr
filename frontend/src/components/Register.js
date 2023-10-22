@@ -1,121 +1,82 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { globalValidationConfig } from "./globalValidationConfig";
-import TextInput from "./TextInput";
-import SubmitButton from "./SubmitButton";
-import FormValidator from "./FormValidator";
+import useFormWithValidation from "./FormValidation";
+import { errorClasses } from "../utils/globalValidationRules";
+import Input from "./Input";
+import ButtonSubmit from "./ButtonSubmit";
 
-function Register({ onRegister, userEmail, setUserEmail }) {
+function Register({ onRegister, formType, setFormType }) {
   const navigate = useNavigate();
 
-  const emailTouched = false;
-  const passwordTouched = false;
+  const {
+    values,
+    errors,
+    isValid,
+    inputActive,
+    handleChange,
+    handleBlur,
+    resetForm,
+  } = useFormWithValidation(formType);
 
-  const { email: emailConfig, password: passwordConfig } =
-    globalValidationConfig;
-  const validationConfig = {
-    email: emailConfig,
-    password: passwordConfig,
+  const { emailClassesError, passwordClassesError, buttonAuthClassError } =
+    errorClasses(errors, isValid, inputActive, formType);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onRegister(values.email, values.password);
+    navigate("/signin");
   };
 
-  const {
-    formData,
-    validity,
-    validationMessage,
-    inputActive,
-    handleInputFocus,
-    handleInputBlur,
-    handleInputChange,
-    isFormValid,
-  } = FormValidator(validationConfig, { email: "", password: "" });
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
-    if (!isFormValid()) {
-      return;
-    }
-
-    onRegister(formData.email, formData.password);
-    navigate("/signin");
-
-    if (setUserEmail) {
-      setUserEmail(formData.email || userEmail);
-    }
-  }
-
-  function renderError(fieldName) {
-    if (
-      !validity[fieldName] &&
-      (inputActive[fieldName] ||
-        ((fieldName === "email" ? emailTouched : passwordTouched) &&
-          !formData[fieldName]))
-    ) {
-      return (
-        <span
-          className={`auth-container__input-error auth-container-input-type-${fieldName}-error ${
-            !validity[fieldName] ? "auth-container__error_visible" : ""
-          }`}
-        >
-          {!formData[fieldName]
-            ? validationConfig[fieldName].errorMessage
-            : validationMessage[fieldName]}
-        </span>
-      );
-    }
-    return null;
-  }
+  useEffect(() => {
+    resetForm();
+    setFormType("register");
+  }, [resetForm]);
 
   return (
     <>
       <div className="auth-container">
-        <h2 className="auth-container__title">Inscrever-se</h2>
+        <h2 className="auth-container__title">Cadastre-se</h2>
         <form
           action="#"
           className="auth-container__form"
-          title="Inscrever-se"
+          title="Cadastre-se"
           onSubmit={handleSubmit}
         >
           <label className="auth-container__field">
-            <TextInput
-              context="auth"
+            <Input
+              name="email"
               type="email"
-              fieldName="email"
-              validity={validity}
-              inputActive={inputActive}
-              value={formData.email}
-              onChange={handleInputChange}
-              onFocus={() => handleInputFocus("email")}
-              onBlur={() => handleInputBlur("email")}
-              placeholder="Email"
+              placeholder="Por favor, digite seu e-mail para cadastrar"
+              value={values.email || ""}
+              onChange={handleChange}
+              onBlur={() => handleBlur("email")}
+              errors={errors.email}
+              errorClassName={emailClassesError}
+              className={`auth-container__input`}
             />
-            {renderError("email")}
           </label>
           <label className="auth-container__field">
-            <TextInput
-              context="auth"
+            <Input
+              name="password"
               type="password"
-              fieldName="password"
-              validity={validity}
-              inputActive={inputActive}
-              value={formData.password}
-              onChange={handleInputChange}
-              onFocus={() => handleInputFocus("password")}
-              onBlur={() => handleInputBlur("password")}
-              placeholder="Password"
+              placeholder="Por favor, digite sua senha para cadastrar"
+              value={values.password || ""}
+              onChange={handleChange}
+              onBlur={() => handleBlur("password")}
+              errors={errors.password}
+              errorClassName={passwordClassesError}
+              className={`auth-container__input`}
             />
-            {renderError("password")}
           </label>
-          <SubmitButton
-            context="auth"
-            type="submit"
-            className="button-auth"
-            isFormValid={isFormValid()}
+          <ButtonSubmit
+            className={buttonAuthClassError}
+            isValid={isValid}
+            onClick={(e) => handleSubmit(e)}
           >
-            Inscrever-se
-          </SubmitButton>
+            Registrar
+          </ButtonSubmit>
           <Link className="auth-container__link" to="/signin">
-            Já é um membro? Faça o login aqui!
+            Já tem uma conta? Entre!
           </Link>
         </form>
       </div>

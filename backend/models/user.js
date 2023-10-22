@@ -6,7 +6,7 @@ const { emailRegex, urlRegex } = require('../utils/validations');
 
 const defaultValues = {
   name: 'Jacques Cousteau',
-  about: 'Explorer',
+  about: 'Sailor, researcher',
   avatar: 'https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg',
 };
 

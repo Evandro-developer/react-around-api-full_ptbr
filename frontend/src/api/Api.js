@@ -1,20 +1,15 @@
-class Api {
-  constructor({ baseUrl }) {
-    this._baseUrl = baseUrl;
-  }
+import { API_URL, getHeaders } from "./apiConfig";
 
-  getHeaders() {
-    return {
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json; charset=UTF-8",
-    };
+class Api {
+  constructor() {
+    this._baseUrl = API_URL;
   }
 
   async getUserInfo() {
     try {
       const response = await fetch(`${this._baseUrl}/users/me`, {
         method: "GET",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
       });
       return response.ok
         ? await response.json()
@@ -25,11 +20,11 @@ class Api {
     }
   }
 
-  async setUserInfo(name, job) {
+  async addNewUserInfo(name, job) {
     try {
       const response = await fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
         body: JSON.stringify({
           name: name,
           about: job,
@@ -44,11 +39,11 @@ class Api {
     }
   }
 
-  async setUserAvatar(link) {
+  async addNewUserInfoAvatar(link) {
     try {
       const response = await fetch(`${this._baseUrl}/users/me/avatar`, {
         method: "PATCH",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
         body: JSON.stringify({
           avatar: link,
         }),
@@ -62,11 +57,11 @@ class Api {
     }
   }
 
-  async getCardsList() {
+  async getAllCards() {
     try {
       const response = await fetch(`${this._baseUrl}/cards`, {
         method: "GET",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
       });
       return response.ok
         ? await response.json()
@@ -77,13 +72,13 @@ class Api {
     }
   }
 
-  async addNewCard(name, link) {
+  async addNewCard(placeName, link) {
     try {
       const response = await fetch(`${this._baseUrl}/cards`, {
         method: "POST",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
         body: JSON.stringify({
-          name,
+          placeName,
           link,
         }),
       });
@@ -100,7 +95,7 @@ class Api {
     try {
       const response = await fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: "DELETE",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
       });
       return response.ok
         ? await response.json()
@@ -115,7 +110,7 @@ class Api {
     try {
       const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
         method: "PUT",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
       });
       return response.ok
         ? await response.json()
@@ -130,7 +125,7 @@ class Api {
     try {
       const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
         method: "DELETE",
-        headers: this.getHeaders(),
+        headers: getHeaders(),
       });
       return response.ok
         ? await response.json()
@@ -142,8 +137,6 @@ class Api {
   }
 }
 
-const api = new Api({
-  baseUrl: "https://api.aroundfinal.com.br",
-});
+const apiInstance = new Api();
 
-export default api;
+export default apiInstance;

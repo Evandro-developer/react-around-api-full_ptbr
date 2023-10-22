@@ -6,15 +6,12 @@ import heartIconEnabled from "../images/heart_icon_enabled.png";
 
 function Card({ card, onCardImageClick, onCardTrashClick, onCardLikeClick }) {
   const { currentUser } = useContext(CurrentUserContext);
-  //console.log("currentUser:", currentUser);
 
   const isOwner = card.owner._id === currentUser?._id;
-  // console.log("IsOwner", isOwner);
 
   const [isLiked, setIsLiked] = useState(
     card.likes.some((i) => i._id === currentUser?._id)
   );
-  //console.log("isLiked:", isLiked);
 
   const heartIcon = isLiked ? heartIconEnabled : heartIconDisabled;
 
@@ -38,13 +35,13 @@ function Card({ card, onCardImageClick, onCardTrashClick, onCardLikeClick }) {
       <picture>
         <img
           src={card.link}
-          alt={`Imagem do local ${card.name}`}
+          alt={`Imagem do local ${card.placeName}`}
           className="card__image"
           onClick={() => onCardImageClick(card)}
         />
       </picture>
       <li className="card__briefing">
-        <h2 className="card__title">{card.name}</h2>
+        <h2 className="card__title">{card.placeName}</h2>
         <div className="card__like-container">
           <img
             src={heartIcon}

@@ -1,5 +1,5 @@
 .popup__field {
-  display: flex;
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 48px;
+  width: 100%;
 }

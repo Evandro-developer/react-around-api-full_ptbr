@@ -17,8 +17,8 @@ function InfoToolTip(props) {
         />
         <p className="infoToolTip__text">
           {props.success === "success"
-            ? "Vitória! Você precisa se registrar."
-            : "Ops, algo saiu deu errado! Por favor, tente novamente."}
+            ? "Vitória! Cadastro concluído com sucesso!"
+            : "Ops, algo saiu errado! Por favor, tente novamente."}
         </p>
         <picture>
           <source media="(max-width: 580px)" srcSet={closedBtnSmall} />

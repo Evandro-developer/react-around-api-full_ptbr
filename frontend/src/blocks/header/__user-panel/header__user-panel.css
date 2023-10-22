@@ -4,6 +4,7 @@
   margin: 45px 0 41px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -14,5 +15,6 @@
     display: flex;
     flex-direction: column-reverse;
     margin: 0;
+    padding-top: 12px;
   }
 }

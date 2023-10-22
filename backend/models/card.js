@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { urlRegex } = require('../utils/validations');
 
 const cardSchema = new mongoose.Schema({
-  name: {
+  placeName: {
     type: String,
     required: true,
     minlength: 2,

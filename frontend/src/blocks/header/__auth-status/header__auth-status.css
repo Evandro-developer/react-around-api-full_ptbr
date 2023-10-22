@@ -14,6 +14,15 @@
   opacity: 0.6;
 }
 
+@media (max-width: 900px) {
+  * {
+    transition: 0.3s ease-in-out;
+  }
+  .header__auth-status {
+    padding-right: 19px;
+  }
+}
+
 @media (max-width: 768px) {
   * {
     transition: 0.3s ease-in-out;

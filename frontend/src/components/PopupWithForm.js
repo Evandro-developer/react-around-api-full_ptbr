@@ -13,25 +13,31 @@ function PopupWithForm({
   const [isClosing, setIsClosing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const closeWithAnimation = (callback) => {
     setIsClosing(true);
-    onSubmit();
+    setTimeout(() => {
+      setIsClosing(false);
+      if (typeof callback === "function") {
+        callback();
+      }
+      onClose();
+    }, 300);
   };
 
-  const handleClose = () => {
-    setIsClosing(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    closeWithAnimation(onSubmit);
   };
 
   const handleEscapeKey = (e) => {
-    if (e.key === "Escape") {
-      setIsClosing(true);
+    if (e.key === "Escape" && isOpen) {
+      closeWithAnimation(onClose);
     }
   };
 
   const handleClickOutside = (e) => {
-    if (e.target.classList.contains("popup__opened")) {
-      onClose();
+    if (e.target.classList.contains("popup__opened") && isOpen) {
+      closeWithAnimation(onClose);
     }
   };
 
@@ -41,31 +47,17 @@ function PopupWithForm({
       setIsClosing(false);
       window.addEventListener("keydown", handleEscapeKey);
       document.addEventListener("click", handleClickOutside);
-    } else {
+    } else if (!isOpen && isMounted) {
       setIsClosing(true);
-      window.removeEventListener("keydown", handleEscapeKey);
-      document.removeEventListener("click", handleClickOutside);
     }
 
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, isMounted]);
 
-  useEffect(() => {
-    if (isClosing) {
-      const timeout = setTimeout(() => {
-        setIsClosing(true);
-        setIsMounted(true);
-        onClose();
-      }, 300);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [isClosing, onClose]);
-
-  if (!isMounted) {
+  if (!isMounted && !isClosing) {
     return null;
   }
 
@@ -88,7 +80,7 @@ function PopupWithForm({
             src={closeIcon}
             alt="Imagem do ícone de fechamento da janela do popup"
             className="popup__closed-btn"
-            onClick={handleClose}
+            onClick={closeWithAnimation}
           />
         </picture>
         <h2 className="popup__heading">{title}</h2>
