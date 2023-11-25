@@ -66,11 +66,13 @@ const likeCard = (req, res, next) => {
       }
 
       // Se o usuário já tiver dado like, lança o erro.
+      // If the user has already liked, throw an error.
       if (card.likes.includes(userId)) {
         throw new LikeError();
       }
 
       // Se o usuário ainda não tiver dado like, adicione.
+      // If the user hasn't liked yet, add.
       card.likes.push(userId);
       return card.save();
     })
@@ -100,6 +102,7 @@ const dislikeCard = (req, res, next) => {
       }
 
       // Se o usuário tiver dado like, remova. Caso contrário, não faça nada.
+      // If the user has liked, remove. Otherwise, do nothing.
       if (card.likes.includes(userId)) {
         card.likes.pull(userId);
         return card.save();

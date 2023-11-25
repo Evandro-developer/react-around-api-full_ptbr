@@ -54,13 +54,12 @@ const getUserById = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  console.log('Request Body:', req.body); // Para verificar os dados recebidos na solicitação
-
   const {
     name, about, avatar, email, password,
   } = req.body;
 
   // Primeiro, verifique se o e-mail já está em uso
+  // First, check if the email is already in use,
   User.findOne({ email })
     .then((existingUser) => {
       if (existingUser) {
@@ -68,6 +67,7 @@ const createUser = (req, res, next) => {
       }
 
       // Se não, continue para criar um novo usuário
+      // If not, proceed to create a new user,
       return bcrypt
         .hash(password, 8)
         .then((hash) => User.create({
@@ -93,6 +93,7 @@ const updateUserProfile = (req, res, next) => {
         throw new UserNotFoundError();
       }
       // Verificar se o usuário está tentando atualizar o perfil de outro usuário
+      // Check if the user is trying to update another user's profile,
       if (user._id.toString() !== userId) {
         throw new UnauthorizedError();
       }
@@ -114,6 +115,7 @@ const updateUserAvatar = (req, res, next) => {
       }
 
       // Verificar se o usuário está tentando atualizar o avatar de outro usuário
+      // Check if the user is trying to update another user's avatar,
       if (user._id.toString() !== userId) {
         throw new UnauthorizedError();
       }
@@ -129,6 +131,11 @@ const updateUserAvatar = (req, res, next) => {
 // o usuário seja redirecionado automaticamente para a página de login
 // após o registro bem-sucedido. Ela também gera um token JWT que pode
 // ser utilizado para autenticar o usuário imediatamente após o registro.
+// This 'register' function is not currently used in the project.
+// However, it may be useful for future implementations where we want
+// the user to be automatically redirected to the login page
+// after a successful registration. It also generates a JWT token that can
+// be used to authenticate the user immediately after registration.
 
 const register = (req, res, next) => {
   console.log('Request Body:', req.body);

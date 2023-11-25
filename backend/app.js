@@ -53,14 +53,16 @@ mongoose
     console.error('Erro na conexão com o MongoDB:', error);
   });
 
-// Aplica o limitador de taxa as rotas /signup e /signin
+// Aplica o limitador de taxa as rotas /signup e /signin.
+// Apply the rate limiter to the /signup and /signin routes.
 app.post('/signup', limiter, validateUserSignup, createUser);
 app.post('/signin', limiter, validateUserLogin, login);
 app.use(routes);
 
 app.use(httpErrorLogger);
 
-// Tratador de erros de validação do Celebrate
+// Tratador de erros de validação do Celebrate.
+// Celebrate validation error handler.
 app.use((err, req, res, next) => {
   if (celebrate.isCelebrateError(err)) {
     const errors = err.details;
@@ -74,10 +76,12 @@ app.use((err, req, res, next) => {
   return null;
 });
 
-// Tratador de erros personalizado
+// Tratador de erros personalizado.
+// Custom error handler.
 app.use((err, req, res, next) => {
   if (err instanceof BaseError) {
-    // Verifica se é uma instância de BaseError
+    // Verifica se é uma instância de BaseError.
+    // Check if it's an instance of BaseError.
     return res.status(err.statusCode).json({ message: err.message });
   }
 

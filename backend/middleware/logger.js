@@ -5,7 +5,8 @@ const path = require('path');
 
 const LOGS_DIRECTORY = './logs';
 
-// Verifica e cria o diretório de logs se ele não existir
+// Verifica e cria o diretório de logs se ele não existir.
+// Check and create the log directory if it doesn't exist.
 if (!fs.existsSync(LOGS_DIRECTORY)) {
   fs.mkdirSync(LOGS_DIRECTORY);
 }

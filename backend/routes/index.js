@@ -6,7 +6,8 @@ const { validateAuthorizationHeader } = require('../utils/validations');
 
 const router = express.Router();
 
-// Middleware de validação do cabeçalho de autorização em todas as rotas
+// Middleware de validação do cabeçalho de autorização em todas as rotas.
+// Middleware for authorization header validation on all routes.
 router.use(validateAuthorizationHeader);
 
 router.use('/users', auth, usersRoutes);
