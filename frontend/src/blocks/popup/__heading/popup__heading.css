@@ -6,6 +6,7 @@
   padding-bottom: 40px;
   margin: 0;
   transition: 0.3s ease-in-out;
+  cursor: default;
 }
 
 @media (max-width: 768px) {

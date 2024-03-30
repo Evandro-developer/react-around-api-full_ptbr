@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
     validate: [
       {
         validator: (value) => urlRegex.test(value) || validator.isURL(value),
-        message: 'URL de avatar inválida',
+        message: 'Invalid avatar URL',
       },
     ],
   },
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
     validate: [
       {
         validator: (value) => emailRegex.test(value) || validator.isEmail(value),
-        message: 'Endereço de e-mail inválido',
+        message: 'Invalid email address',
       },
     ],
   },

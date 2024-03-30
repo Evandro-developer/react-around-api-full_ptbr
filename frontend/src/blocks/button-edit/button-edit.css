@@ -3,8 +3,8 @@
   height: 24px;
   border-radius: 2px #fff;
   position: absolute;
-  top: 16px;
-  right: -40px;
+  top: 15px;
+  right: -36px;
   cursor: pointer;
   opacity: 1;
   transition: 0.3s ease-in-out;
@@ -16,12 +16,12 @@
   opacity: 0.6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 608px) {
   * {
     transition: 0.3s ease-in-out;
   }
   .button-edit {
-    top: 4px;
+    top: 6px;
     right: -24px;
     width: 18px;
     height: 18px;

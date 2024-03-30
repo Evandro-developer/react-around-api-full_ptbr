@@ -44,9 +44,7 @@ const getUserById = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new UserNotFoundError(
-          'Nenhum usuário com ID correspondente encontrado.',
-        );
+        throw new UserNotFoundError('No user with corresponding ID found');
       }
       return res.json(user);
     })

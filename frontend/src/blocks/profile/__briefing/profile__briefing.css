@@ -11,13 +11,12 @@
   position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 608px) {
   * {
     transition: 0.3s ease-in-out;
   }
   .profile__briefing {
-    margin: 0;
-    padding: 0 0 22px;
+    padding: 0;
 
     align-items: center;
     justify-content: center;

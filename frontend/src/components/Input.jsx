@@ -17,7 +17,7 @@ function Input({
         type={type}
         name={name}
         placeholder={placeholder}
-        value={value || ""}
+        value={value}
         onChange={onChange}
         onBlur={() => onBlur(name)}
         required

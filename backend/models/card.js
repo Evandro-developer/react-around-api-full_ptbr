@@ -15,7 +15,7 @@ const cardSchema = new mongoose.Schema({
       validator(value) {
         return urlRegex.test(value);
       },
-      message: 'URL de imagem inválida',
+      message: 'Invalid image URL',
     },
   },
   owner: {

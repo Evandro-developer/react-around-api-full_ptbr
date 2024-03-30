@@ -1,0 +1,93 @@
+{
+  "header": {
+    "login": "Faça login!",
+    "signup": "Cadastre-se!",
+    "logout": "Sair"
+  },
+
+  "profile": {
+    "avatarImage": "Imagem do Avatar",
+    "editBtnImage": "Imagem do button editar avatar",
+    "btnImage": "Imagem do button editar",
+    "addBtnImage": "Imagem de button adicionar"
+  },
+
+  "editAvatarPopup": {
+    "avatarPlaceholder": "Insira o URL do novo avatar",
+    "title": "Alterar a foto do perfil"
+  },
+  "editProfilePopup": {
+    "namePlaceholder": "Insira o nome do Usuário",
+    "professionPlaceholder": "Insira a sua Profissão",
+    "title": "Editar Perfil"
+  },
+  "addPlacePopup": {
+    "placeNamePlaceholder": "Insira o nome do novo local",
+    "imageUrlPlaceholder": "Insira o URL da Imagem",
+    "title": "Novo Local"
+  },
+  "confirmationPopup": {
+    "title": "Tem certeza?",
+    "button": "Sim"
+  },
+
+  "card": {
+    "trashIconAlt": "Ícone de remoção para lixeira",
+    "heartIconActivatedAlt": "Ícone de coração ativado com preenchimento",
+    "heartIconDeactivatedAlt": "Ícone de coração desativado apenas com bordas"
+  },
+
+  "default": {
+    "closeIcon": "Ícone de fechamento da janela popup",
+    "saveButton": "Salvar"
+  },
+
+  "successIcon": "Ícone de sucesso",
+  "errorIcon": "Ícone de erro",
+  "success": "Vitória! Cadastro concluído com sucesso!",
+  "error": "Ops, algo saiu errado! Por favor, tente novamente.",
+
+  "register": {
+    "title": "Cadastre-se",
+    "submitAuth": "Registrar",
+    "emailPlaceholder": "Por favor, digite seu e-mail para cadastrar",
+    "passwordPlaceholder": "Por favor, digite sua senha para cadastrar",
+    "btnAuth": "Registrar",
+    "alreadyAMember": "Já tem uma conta? Entre!"
+  },
+
+  "login": {
+    "title": "Entrar",
+    "submitAuth": "Entrar",
+    "emailPlaceholder": "Por favor, digite seu e-mail para entrar",
+    "passwordPlaceholder": "Por favor, digite sua senha para entrar",
+    "btnAuth": "Entrar",
+    "notAMember": "Ainda não é membro? Inscreva-se aqui!"
+  },
+
+  "footer": {
+    "author": "por Evandro M Oliveira",
+    "profession": "Desenvolvedor Web Full-Stack",
+    "linkedinAlt": "Imagem com o ícone do linkedin",
+    "githubAlt": "Imagem com o ícone do Github"
+  },
+
+  "validation": {
+    "emailRequired": "Email é requerido, ex.: 'nome@dominio.com'",
+    "emailPattern": "Informe um e-mail no formato 'nome@dominio.com'",
+    "passwordRequired": "Senha é requerida, ex.: 'Ex@mpl3'",
+    "passwordMinLength": "Senha deve ter pelo menos 6 caracteres",
+    "passwordMaxLength": "Senha deve ter no máximo 100 caracteres",
+    "passwordPattern": "'Ex@mpl3', mínimo 6 caracteres, inclua maiúsculas, minúsculas, números e símbolos.",
+    "avatarRequired": "Link do Avatar é requerido, ex.: 'http://exemplo.com/imagem.jpg'",
+    "avatarPattern": "O link deve começar com 'http://' ou 'https://'",
+    "nameRequired": "Nome é requerido, ex.: 'João Silva'",
+    "namePattern": "O nome deve ter entre 2 e 200 caracteres",
+    "aboutRequired": "Descrição é requerida, ex.: 'Pesquisador'",
+    "aboutPattern": "Descrição deve ter pelo menos 2 caracteres",
+    "placeNameRequired": "O nome do novo local é requerido, ex.: 'Parque Central'",
+    "placeNamePattern": "O nome do novo local deve ter entre 2 e 200 caracteres",
+    "linkRequired": "Link da imagem é requerido, ex.: 'http://exemplo.com/imagem.jpg'",
+    "linkPattern": "O link deve começar com 'http://' ou 'https://'"
+  }
+}

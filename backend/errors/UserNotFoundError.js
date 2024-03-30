@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 class UserNotFoundError extends BaseError {
   constructor(message) {
-    super(message || 'Erro, usuário não encontrado');
+    super(message || 'Error, user not found');
     this.name = 'UserNotFoundError';
     this.statusCode = 404;
   }

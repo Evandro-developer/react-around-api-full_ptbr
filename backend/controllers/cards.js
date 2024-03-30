@@ -50,7 +50,7 @@ const deleteCard = (req, res, next) => {
       if (!deletedCard) {
         throw new CardNotFoundError();
       }
-      res.json({ message: 'Esta postagem foi excluída' });
+      res.json({ message: 'This post has been deleted' });
     })
     .catch(next);
 };

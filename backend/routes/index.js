@@ -10,7 +10,7 @@ const router = express.Router();
 // Middleware for authorization header validation on all routes.
 router.use(validateAuthorizationHeader);
 
-router.use('/users', auth, usersRoutes);
+router.use('/users', usersRoutes);
 router.use('/cards', auth, cardsRoutes);
 
 module.exports = router;

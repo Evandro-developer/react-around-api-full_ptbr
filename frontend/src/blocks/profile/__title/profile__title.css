@@ -11,9 +11,19 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  cursor: default;
 }
 
 @media (max-width: 768px) {
+  * {
+    transition: 0.3s ease-in-out;
+  }
+  .profile__title {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 608px) {
   * {
     transition: 0.3s ease-in-out;
   }

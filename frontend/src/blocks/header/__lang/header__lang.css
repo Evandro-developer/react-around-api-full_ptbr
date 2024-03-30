@@ -1,0 +1,15 @@
+.header__lang {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header__lang.selected {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.header__lang:hover {
+  transition: 0.3s ease-in-out;
+  opacity: 0.6;
+}

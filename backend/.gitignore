@@ -13,8 +13,10 @@ node_modules
 .DS_Store
 .idea
 .vscode
+
 package-lock.json
+
 .env
 .env.production
-.env.development
-.ecosystem.config.js
+
+

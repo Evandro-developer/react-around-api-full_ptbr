@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 class DislikeError extends BaseError {
   constructor(message) {
-    super(message || 'O cartão ainda não foi curtido.');
+    super(message || 'The card has not been liked yet');
     this.name = 'DislikeError';
     this.statusCode = 409;
   }

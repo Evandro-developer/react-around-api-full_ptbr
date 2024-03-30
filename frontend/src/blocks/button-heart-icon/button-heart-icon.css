@@ -1,13 +1,13 @@
-.button-heart-icon {
+.button-heart-icon,
+.button-heart-icon__active {
   width: 21px;
   height: 19px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-.button-heart-icon:hover {
-  transition: 0.3s ease-in-out;
+.button-heart-icon:hover,
+.button-heart-icon__active:hover {
   opacity: 0.6;
 }
 
@@ -18,4 +18,8 @@
   to {
     opacity: 1;
   }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out forwards;
 }

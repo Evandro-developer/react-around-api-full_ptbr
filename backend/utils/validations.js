@@ -49,7 +49,7 @@ exports.validateUserAvatar = celebrate({
     avatar: Joi.string()
       .required()
       .pattern(urlRegex)
-      .custom(exports.validateURL, 'URL de avatar inválida'),
+      .custom(exports.validateURL, 'Invalid avatar URL'),
   }),
 });
 
@@ -84,7 +84,7 @@ exports.validateCardCreation = celebrate({
     placeName: Joi.string().min(2).max(30).required(),
     link: Joi.string()
       .required()
-      .custom(exports.validateURL, 'URL de imagem inválida'),
+      .custom(exports.validateURL, 'Invalid image URL'),
   }),
 });
 

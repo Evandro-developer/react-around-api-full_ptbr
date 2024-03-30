@@ -1,19 +1,15 @@
-require('dotenv-flow').config();
+require('dotenv').config({
+  path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env',
+});
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
 const celebrate = require('celebrate');
-
-const limiter = require('./utils/limiter');
 const { httpRequestLogger, httpErrorLogger } = require('./middleware/logger');
 const routes = require('./routes/index');
-const { createUser, login } = require('./controllers/users');
 const BaseError = require('./errors/BaseError');
-const {
-  validateUserSignup,
-  validateUserLogin,
-} = require('./utils/validations');
 
 const app = express();
 const { PORT } = process.env;
@@ -34,31 +30,21 @@ const corsOptions = {
 };
 
 app.use(cors(isProduction ? corsOptions : {}));
-app.options('*', cors(isProduction ? corsOptions : {}));
-
 app.use(helmet());
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(httpRequestLogger);
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log('Conexão com o MongoDB bem-sucedida!');
+    console.log('Successful connection to MongoDB!');
   })
   .catch((error) => {
-    console.error('Erro na conexão com o MongoDB:', error);
+    console.error('Error connecting to MongoDB:', error);
   });
 
-// Aplica o limitador de taxa as rotas /signup e /signin.
-// Apply the rate limiter to the /signup and /signin routes.
-app.post('/signup', limiter, validateUserSignup, createUser);
-app.post('/signin', limiter, validateUserLogin, login);
 app.use(routes);
-
 app.use(httpErrorLogger);
 
 // Tratador de erros de validação do Celebrate.
@@ -66,7 +52,7 @@ app.use(httpErrorLogger);
 app.use((err, req, res, next) => {
   if (celebrate.isCelebrateError(err)) {
     const errors = err.details;
-    let errorMessage = 'Erro de validação: ';
+    let errorMessage = 'Validation error: ';
     errors.forEach(({ message }) => {
       errorMessage += `${message}, `;
     });

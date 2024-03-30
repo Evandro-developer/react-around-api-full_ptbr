@@ -20,6 +20,17 @@
     transition: 0.3s ease-in-out;
   }
   .header__line {
-    max-width: 320px;
+    max-width: 736px;
+    align-self: center;
+  }
+}
+
+@media (max-width: 608px) {
+  * {
+    transition: 0.3s ease-in-out;
+  }
+  .header__line {
+    max-width: 288px;
+    align-self: center;
   }
 }

@@ -1,0 +1,12 @@
+.infoToolTip__closed {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

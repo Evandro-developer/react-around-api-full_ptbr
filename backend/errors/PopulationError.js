@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 class PopulationError extends BaseError {
   constructor(message) {
-    super(message || 'Falha ao preencher o cartão.');
+    super(message || 'Failure to fill out the card');
     this.name = 'PopulationError';
     this.statusCode = 500;
   }

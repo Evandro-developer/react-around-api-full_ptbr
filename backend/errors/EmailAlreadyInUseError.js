@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 class EmailAlreadyInUseError extends BaseError {
   constructor(message) {
-    super(message || 'O e-mail já está em uso');
+    super(message || 'The email is already in use');
     this.name = 'EmailAlreadyInUseError';
     this.statusCode = 400;
   }

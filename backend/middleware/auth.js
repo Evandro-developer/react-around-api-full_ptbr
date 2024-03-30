@@ -10,11 +10,11 @@ const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new UnauthorizedError('Não autorizado');
+    throw new UnauthorizedError('Unauthorized');
   }
 
   if (NODE_ENV === 'production' && !JWT_SECRET) {
-    throw new UnauthorizedError('JWT_SECRET deve ser definido em produção');
+    throw new UnauthorizedError('JWT_SECRET must be defined in production');
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -26,7 +26,7 @@ const auth = (req, res, next) => {
 
     req.user = payload;
   } catch (err) {
-    throw new UnauthorizedError('Não autorizado');
+    throw new UnauthorizedError('Unauthorized');
   }
 
   next();

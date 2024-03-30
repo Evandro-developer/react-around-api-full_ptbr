@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 class UnauthorizedError extends BaseError {
   constructor(message) {
-    super(message || 'Erro de autorização');
+    super(message || 'Authorization error');
     this.name = 'UnauthorizedError';
     this.statusCode = 401;
   }

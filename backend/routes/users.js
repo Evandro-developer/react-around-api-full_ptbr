@@ -1,5 +1,9 @@
 const express = require('express');
+const limiter = require('../utils/limiter');
+const auth = require('../middleware/auth');
 const {
+  createUser,
+  login,
   getAllUsers,
   getCurrentUser,
   getUserById,
@@ -7,6 +11,8 @@ const {
   updateUserAvatar,
 } = require('../controllers/users');
 const {
+  validateUserSignup,
+  validateUserLogin,
   validateUserId,
   validateUserProfile,
   validateUserAvatar,
@@ -14,10 +20,14 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
-router.get('/me', getCurrentUser);
-router.get('/:userId', validateUserId, getUserById);
-router.patch('/me', validateUserProfile, updateUserProfile);
-router.patch('/me/avatar', validateUserAvatar, updateUserAvatar);
+// Aplica o limitador de taxa as rotas /signup e /signin.
+// Apply the rate limiter to the /signup and /signin routes.
+router.post('/signup', limiter, validateUserSignup, createUser);
+router.post('/signin', limiter, validateUserLogin, login);
+router.get('/', auth, getAllUsers);
+router.get('/me', auth, getCurrentUser);
+router.get('/:userId', auth, validateUserId, getUserById);
+router.patch('/me', auth, validateUserProfile, updateUserProfile);
+router.patch('/me/avatar', auth, validateUserAvatar, updateUserAvatar);
 
 module.exports = router;

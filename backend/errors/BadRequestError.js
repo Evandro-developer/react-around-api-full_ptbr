@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 class BadRequestError extends BaseError {
   constructor(message) {
-    super(message || 'Solicitação inválida');
+    super(message || 'Invalid request');
     this.name = 'BadRequestError';
     this.statusCode = 400;
   }

@@ -1,0 +1,93 @@
+{
+  "header": {
+    "login": "Log in!",
+    "signup": "Sign up!",
+    "logout": "Logout"
+  },
+
+  "profile": {
+    "avatarImage": "Avatar Image",
+    "editBtnImage": "Edit Avatar Button Image",
+    "btnImage": "Edit Button Image",
+    "addBtnImage": "Add Button Image"
+  },
+
+  "editAvatarPopup": {
+    "avatarPlaceholder": "Enter the new avatar URL",
+    "title": "Change Profile Picture"
+  },
+  "editProfilePopup": {
+    "namePlaceholder": "Enter User Name",
+    "professionPlaceholder": "Enter Your Profession",
+    "title": "Edit Profile"
+  },
+  "addPlacePopup": {
+    "placeNamePlaceholder": "Enter the name of the new place",
+    "imageUrlPlaceholder": "Enter the Image URL",
+    "title": "New Place"
+  },
+  "confirmationPopup": {
+    "title": "Are you sure?",
+    "button": "Yes"
+  },
+
+  "card": {
+    "trashIconAlt": "Trash removal icon",
+    "heartIconActivatedAlt": "Activated heart icon with filling",
+    "heartIconDeactivatedAlt": "Deactivated heart icon with only borders"
+  },
+
+  "default": {
+    "closeIcon": "Close window popup icon",
+    "saveButton": "Save"
+  },
+
+  "successIcon": "Success icon",
+  "errorIcon": "Error icon",
+  "success": "Victory! Registration completed successfully!",
+  "error": "Oops, something went wrong! Please try again.",
+
+  "register": {
+    "title": "Sign Up",
+    "submitAuth": "Register",
+    "emailPlaceholder": "Please enter your email to register",
+    "passwordPlaceholder": "Please enter your password to register",
+    "btnAuth": "Register",
+    "alreadyAMember": "Already have an account? Log in!"
+  },
+
+  "login": {
+    "title": "Login",
+    "submitAuth": "Log in",
+    "emailPlaceholder": "Please enter your email to log in",
+    "passwordPlaceholder": "Please enter your password to log in",
+    "btnAuth": "Log in",
+    "notAMember": "Not a member yet? Sign up here!"
+  },
+
+  "footer": {
+    "author": "by Evandro M Oliveira",
+    "profession": "Web Developer Full-Stack",
+    "linkedinAlt": "Linkedin icon image",
+    "githubAlt": "Github icon image"
+  },
+
+  "validation": {
+    "emailRequired": "Email is required, e.g., 'name@domain.com'",
+    "emailPattern": "Enter an email in the format 'name@domain.com'",
+    "passwordRequired": "Password is required, e.g., 'Ex@mpl3'",
+    "passwordMinLength": "Password must be at least 6 characters long",
+    "passwordMaxLength": "Password must be no more than 100 characters long",
+    "passwordPattern": "'Ex@mpl3', minimum 6 characters, include uppercase, lowercase, numbers, and symbols.",
+    "avatarRequired": "Avatar link is required, e.g., 'http://example.com/image.jpg'",
+    "avatarPattern": "Link should start with 'http://' or 'https://'",
+    "nameRequired": "Name is required, e.g., 'John Doe'",
+    "namePattern": "Name should be between 2 and 200 characters",
+    "aboutRequired": "Description is required, e.g., 'Researcher'",
+    "aboutPattern": "Description should be at least 2 characters long",
+    "placeNameRequired": "New place name is required, e.g., 'Central Park'",
+    "placeNamePattern": "New place name should be between 2 and 200 characters",
+    "linkRequired": "Image link is required, e.g., 'http://example.com/image.jpg'",
+    "linkPattern": "Link should start with 'http://' or 'https://'"
+  }
+}
